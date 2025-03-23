@@ -9,10 +9,11 @@ def objective(trial):
     config = {
         "model": {
             "input_dim": 28,  # update based on your data
-            "lr": trial.suggest_float("lr", 1e-4, 1e-3, log=True),
-            "weight_decay": trial.suggest_float("weight_decay", 1e-3, 1e-2, log=True),
+            "lr": trial.suggest_float("lr", 1e-5, 1e-1, log=True),
+            "weight_decay": trial.suggest_float("weight_decay", 1e-6, 1e-2, log=True),
             "batch_size": trial.suggest_categorical("batch_size", [32, 64, 128]),
-            "num_epochs": 100,
+            "max_epochs": 50,
+            "patience": 5,
             "device": "cpu",
             "threshold": threshold,
             "seed": 42
@@ -27,18 +28,17 @@ def objective(trial):
 
     # Evaluate
     model.eval()
-    preds = []
+    probs = []
     targets = []
 
     with torch.no_grad():
         for xb, yb in val_loader:
-            probs = model(xb).squeeze()
-            predicted = (probs > threshold).int()
-            preds.extend(predicted.numpy())
-            targets.extend(yb.numpy())
+            xb, yb = xb.to(config["model"]["device"]), yb.to(config["model"]["device"])
+            pred_probs = model(xb).squeeze()
+            probs.extend(pred_probs.cpu().numpy())
+            targets.extend(yb.cpu().numpy())
 
-    # You can switch this to recall_score, f1_score, etc. if needed
-    auc = roc_auc_score(targets, preds)
+    auc = roc_auc_score(targets, probs)  # ✅ AUC on probabilities (correct)
     return auc
 
 
