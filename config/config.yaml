@@ -1,13 +1,12 @@
-config_yaml = """
 model:
-  input_dim: 30  # Adjust after checking final feature count
-  lr: 0.01
-  weight_decay: 0.0001
-  batch_size: 64
-  num_epochs: 50
-  threshold: 0.5
+  input_dim: 28           # Number of input features in your processed CSV
+  lr: 0.0008887654177594423              # Learning rate
+  weight_decay: 0.003464121351653665    # L2 regularization
+  batch_size: 32
+  num_epochs: 100
+  threshold: 0.4713132446200099
   seed: 42
-  device: "cuda"  # or "cpu"
+  device: "cpu"           # or "cuda" if using GPU
+
 data:
   path: "data/processed/telco_churn_processed.csv"
-"""
