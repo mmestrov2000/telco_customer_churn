@@ -6,3 +6,4 @@ seaborn
 torch
 optuna
 pyyaml
+boto3
