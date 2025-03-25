@@ -4,29 +4,45 @@ This project aims to predict customer churn using the [Telco Customer Churn data
 
 ---
 
+## 🚀 Tech Stack
+
+- **Python 3.7+**
+- **PyTorch**: For model building and training
+- **Optuna**: For hyperparameter tuning
+- **FastAPI**: For serving the model as an API
+- **Uvicorn**: ASGI server to run FastAPI
+- **AWS EC2**: Model deployed on a Linux-based virtual machine
+- **SCP / SSH**: To copy files and manage the remote server
+- **Boto3**: (optional) for AWS interactions from Python
+
+> ✅ Model was deployed on **Amazon Web Services (AWS)** using **EC2 instances** to explore, understand, and practice real-world ML deployment workflows.
+
+---
+
 ## 📁 Project Structure
 
 ```
 .
-├── config/
-│   └── config.yaml                  # YAML file for training configuration
-├── data/
-│   ├── raw/                         # Contains raw dataset (CSV)
-│   └── processed/                   # Preprocessed data files
-├── models/
-│   └── logistic_regression_v1/     # Saved model and config
-├── notebooks/
-│   └── 01_eda.ipynb                 # Exploratory Data Analysis notebook
-├── reports/                         # Placeholder for future reports/figures
-├── src/
-│   ├── data_prep.py                 # Data cleaning and encoding
-│   ├── evaluate.py                  # Model evaluation metrics
-│   ├── model.py                     # PyTorch logistic regression model
-│   ├── optimize.py                  # Hyperparameter tuning using Optuna
-│   ├── train.py                     # Model training pipeline
-│   └── utils.py                     # Utility functions (if extended)
-├── main.py                          # Main training + evaluation script
-├── requirements.txt
+├── config/  
+│   └── config.yaml                  # YAML file for training configuration  
+├── data/  
+│   ├── raw/                         # Contains raw dataset (CSV)  
+│   └── processed/                   # Preprocessed data files  
+├── models/  
+│   └── logistic_regression_v1/     # Saved model and config  
+├── notebooks/  
+│   └── 01_eda.ipynb                 # Exploratory Data Analysis notebook  
+├── reports/                         # Placeholder for future reports/figures  
+├── src/  
+│   ├── data_prep.py                 # Data cleaning and encoding  
+│   ├── evaluate.py                  # Model evaluation metrics  
+│   ├── model.py                     # PyTorch logistic regression model  
+│   ├── optimize.py                  # Hyperparameter tuning using Optuna  
+│   ├── train.py                     # Model training pipeline  
+│   └── utils.py                     # Utility functions (if extended)  
+├── main.py                          # Main training + evaluation script  
+├── test_api.py                      # Script to send a sample request to the deployed model  
+├── requirements.txt  
 └── README.md
 ```
 
@@ -115,11 +131,3 @@ Install all dependencies with:
 ```bash
 pip install -r requirements.txt
 ```
-
----
-
-## 📌 Notes
-
-- Trained model is saved at: `models/logistic_regression_v1/logistic_regression_v1.pth`
-- You can tweak config and rerun `main.py` for new experiments
-- Add visual reports or exported plots to `/reports`
